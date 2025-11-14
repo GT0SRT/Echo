@@ -4,6 +4,7 @@ import { Select, SelectTrigger, SelectItem, SelectContent, SelectValue } from ".
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { TracksContext } from "../context/TracksContext";
+import { Button } from "../ui/button";
 
 export default function TrackDialog() {
     const { addTrack } = useContext(TracksContext);
@@ -47,7 +48,9 @@ export default function TrackDialog() {
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger className="w-full py-2 rounded-lg bg-cyan-600 text-white">Add Track</DialogTrigger>
+            <DialogTrigger className="w-full">
+                <Button className="w-full">Add Track</Button>
+            </DialogTrigger>
 
             <DialogContent className="bg-[#0e0e0e] border border-[#1f1f1f] text-white max-w-md">
                 <DialogHeader>
@@ -164,10 +167,14 @@ export default function TrackDialog() {
                         </div>
                     </div>
 
-
                     <div className="flex justify-end gap-2">
-                        <button onClick={() => setOpen(false)} className="px-3 py-2 rounded-md border border-slate-700">Cancel</button>
-                        <button onClick={handleAdd} className="px-4 py-2 rounded-md bg-cyan-600 text-white">Save Track</button>
+                        <button onClick={() => setOpen(false)} className="px-3 py-2 rounded-md border border-slate-700">
+                            Cancel
+                        </button>
+
+                        <Button onClick={handleAdd}>
+                            Save Track
+                        </Button>
                     </div>
                 </div>
             </DialogContent>

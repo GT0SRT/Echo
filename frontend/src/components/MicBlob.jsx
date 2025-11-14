@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import micIcon from "../assets/mic.svg";
-import "./micblob.css";
+import "./MicBlob.css";
 
-export default function MicBlob({ listening }) {
+export default function MicBlob() {
+  const [active, setActive] = useState(false);
+
   return (
-    <div className={`mic-blob ${listening ? "listening" : ""}`}>
-      <img src={micIcon} alt="mic" className="mic-icon" />
+    <div
+      className={`mic-blob ${active ? "listening" : ""}`}
+      onClick={() => setActive(!active)}
+    >
+      <img src={micIcon} alt="" className="mic-icon" />
     </div>
   );
 }

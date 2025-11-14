@@ -1,38 +1,66 @@
 .mic-blob {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  background: #06b6d4;
+  width: 74px;
+  height: 74px;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #1F1C18, #8E0E00);
   display: flex;
-  justify-content: center;
   align-items: center;
-  transition: 0.3s ease;
+  justify-content: center;
   cursor: pointer;
-  box-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
+  transition: 0.25s ease;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+  position: relative;
+}
+
+.mic-blob:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 32px rgba(0,0,0,0.55);
 }
 
 .mic-icon {
   width: 32px;
   height: 32px;
+  transition: 0.25s ease;
+}
+
+.mic-blob.listening {
+  animation: pulse 1s infinite;
+  box-shadow: 0 0 40px rgba(255,60,20,0.4);
+  transform: scale(1.08);
+}
+
+.mic-blob.listening .mic-icon {
+  animation: bob 1s infinite;
+}
+
+.mic-blob.listening::after {
+  content: "";
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  border-radius: 9999px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  background: radial-gradient(circle, rgba(255,60,20,0.18), transparent 60%);
+  animation: ripple 1.5s infinite;
   pointer-events: none;
 }
 
-.listening {
-  animation: pulse 1s infinite;
-  background: #0891b2;
+@keyframes pulse {
+  0% { transform: scale(1.05); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1.05); }
 }
 
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
-  }
-  50% {
-    transform: scale(1.15);
-    box-shadow: 0 0 30px rgba(6, 182, 212, 0.8);
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
-  }
+@keyframes bob {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+ 100% { transform: translateY(0); }
+}
+
+@keyframes ripple {
+  0% { transform: translate(-50%,-50%) scale(0.7); opacity: 0.35; }
+  70% { transform: translate(-50%,-50%) scale(1.2); opacity: 0.1; }
+ 100% { transform: translate(-50%,-50%) scale(1.4); opacity: 0; }
 }
