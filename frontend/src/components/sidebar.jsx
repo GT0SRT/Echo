@@ -4,7 +4,7 @@ import Trackcard from "./Trackcard";
 import { TracksContext } from "../context/TracksContext";
 import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
 
-export default function Sidebar({ isCollapsed, onToggle }) {
+export default function Sidebar({ isCollapsed, onToggle, selectedTrack, onSelectTrack }) {
   const { tracks, removeTrack, updateTrack } = useContext(TracksContext);
 
   const handleEdit = (id) => {
@@ -20,6 +20,9 @@ export default function Sidebar({ isCollapsed, onToggle }) {
   const handleDelete = (id) => {
     if (confirm("Are you sure you want to delete this track?")) {
       removeTrack(id);
+      if (selectedTrack?.id === id) {
+        onSelectTrack(null);
+      }
     }
   };
 
@@ -53,7 +56,11 @@ export default function Sidebar({ isCollapsed, onToggle }) {
           {tracks.map((t) => (
             <div
               key={t.id}
-              className="w-8 h-8 rounded-full bg-cyan-600/20 flex items-center justify-center text-xs text-cyan-400 cursor-pointer hover:bg-cyan-600/30 transition-colors"
+              onClick={() => onSelectTrack(t)}
+              className={`w-8 h-8 rounded-full flex items-center justify-center text-xs cursor-pointer transition-colors ${selectedTrack?.id === t.id
+                ? 'bg-cyan-600 text-white'
+                : 'bg-cyan-600/20 text-cyan-400 hover:bg-cyan-600/30'
+                }`}
               title={t.name || t.title}
             >
               {(t.name || t.language)?.charAt(0) || "T"}
@@ -81,13 +88,15 @@ export default function Sidebar({ isCollapsed, onToggle }) {
       <div className="flex flex-col gap-2 mt-4">
         {tracks.length === 0 && <div className="text-sm text-slate-500 text-center py-4">No tracks yet</div>}
         {tracks.map((t) => (
-          <Trackcard
-            key={t.id}
-            id={t.id}
-            name={t.name || t.title}
-            onEdit={handleEdit}
-            onDelete={handleDelete}
-          />
+          <div key={t.id} onClick={() => onSelectTrack(t)}>
+            <Trackcard
+              id={t.id}
+              name={t.name || t.title}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+              isSelected={selectedTrack?.id === t.id}
+            />
+          </div>
         ))}
       </div>
     </div>

@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import { MoreVertical, Edit2, Trash2 } from "lucide-react";
 
-export default function Trackcard({ id, name, onEdit, onDelete }) {
+export default function Trackcard({ id, name, onEdit, onDelete, isSelected }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <div className="relative group w-full">
-      <div className="flex items-center justify-between px-4 py-3 bg-[#1a1a1a] hover:bg-[#222] rounded-lg border border-[#2a2a2a] transition-all cursor-pointer">
-        <span className="text-sm font-medium text-cyan-100">{name || "Untitled"}</span>
+      <div className={`flex items-center justify-between px-4 py-3 rounded-lg border transition-all cursor-pointer ${isSelected
+          ? 'bg-cyan-600/20 border-cyan-600 hover:bg-cyan-600/30'
+          : 'bg-[#1a1a1a] hover:bg-[#222] border-[#2a2a2a]'
+        }`}>
+        <span className={`text-sm font-medium ${isSelected ? 'text-cyan-300' : 'text-cyan-100'}`}>
+          {name || "Untitled"}
+        </span>
 
         <div className="relative">
           <button
