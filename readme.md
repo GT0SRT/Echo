@@ -112,12 +112,6 @@ Create a social learning ecosystem:
 
 ---
 
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome!
-
----
-
 ## 👏 Acknowledgments
 
 Built with ❤️ for language learners worldwide who deserve better than flashcards.
