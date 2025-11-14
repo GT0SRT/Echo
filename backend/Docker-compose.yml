@@ -3,6 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: backend-api
     ports:
       - "8000:8000"
     env_file:

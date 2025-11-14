@@ -253,6 +253,14 @@ async def startup_event():
     print(f"API Key configured: {bool(os.getenv('GOOGLE_API_KEY'))}")
     print("=" * 50)
 
+@app.get("/agora-token")
+def agora_token():
+    return {
+        "token": "",  # empty for testing 
+        "channel_name": "echo_test",
+        "uid": 1
+    }
+
 
 if __name__ == "__main__":
     import uvicorn
