@@ -36,32 +36,6 @@ export default function Sidebar({ isCollapsed, onToggle, selectedTrack, onSelect
         >
           <PanelLeftOpen className="w-6 h-6 text-cyan-400" />
         </button>
-        {/* NEW: Mode Buttons (icons only when collapsed) */}
-        <div className="flex flex-col gap-5 mt-6">
-          <button
-            onClick={() => onModeChange("chat")}
-            className={`p-2 rounded-lg ${
-              mode === "chat"
-                ? "bg-cyan-600 text-white"
-                : "text-cyan-400 hover:bg-[#1f1f1f]"
-            }`}
-            title="Chat Mode"
-          >
-            <MessageCircle className="w-5 h-5" />
-          </button>
-
-          <button
-            onClick={() => onModeChange("call")}
-            className={`p-2 rounded-lg ${
-              mode === "call"
-                ? "bg-cyan-600 text-white"
-                : "text-cyan-400 hover:bg-[#1f1f1f]"
-            }`}
-            title="Live Call Mode"
-          >
-            <Phone className="w-5 h-5" />
-          </button>
-        </div>
 
         <div className="flex-1 flex flex-col items-center justify-center gap-8">
           <div className="writing-mode-vertical text-cyan-400 text-sm font-semibold tracking-wider" style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}>
@@ -70,7 +44,7 @@ export default function Sidebar({ isCollapsed, onToggle, selectedTrack, onSelect
 
           {tracks.length > 0 && (
             <>
-              <div className="w-8 h-[1px] bg-[#1f1f1f]"></div>
+              <div className="w-8 h-px bg-[#1f1f1f]"></div>
               <div className="writing-mode-vertical text-slate-500 text-xs" style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}>
                 LESSONS
               </div>

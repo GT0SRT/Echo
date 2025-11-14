@@ -1,15 +1,14 @@
 import { useState, useCallback } from "react";
 import axios from "axios";
 
-import { createClient, createMicrophoneAndCameraTracks } from "agora-rtc-react";
+import AgoraRTC from "agora-rtc-sdk-ng";
 import useChatStore from "../store/chatStore";
 
 const APP_ID = import.meta.env.VITE_AGORA_APP_ID;
 
-const useClient = createClient({ mode: "rtc", codec: "vp8" });
+const client = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
 
 export default function Conversation() {
-  const client = useClient();
   const [joined, setJoined] = useState(false);
   const [tracks, setTracks] = useState(null);
 
@@ -24,7 +23,8 @@ export default function Conversation() {
     try {
       const { token, uid, channel_name } = await getToken();
 
-      const [micTrack, camTrack] = await createMicrophoneAndCameraTracks();
+      const micTrack = await AgoraRTC.createMicrophoneAudioTrack();
+      const camTrack = await AgoraRTC.createCameraVideoTrack();
       setTracks([micTrack, camTrack]);
 
       await client.join(APP_ID, channel_name, token, uid);
@@ -46,7 +46,7 @@ export default function Conversation() {
     } catch (err) {
       console.error(err);
     }
-  }, [client, addMessage]);
+  }, [addMessage]);
 
   const handleLeave = async () => {
     if (tracks) {
@@ -54,7 +54,7 @@ export default function Conversation() {
         try {
           t.stop();
           t.close();
-        } catch {}
+        } catch { }
       });
     }
     await client.leave();
