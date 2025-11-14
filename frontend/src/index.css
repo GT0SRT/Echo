@@ -1,1 +1,55 @@
 @import "tailwindcss";
+
+/* base neon theme */
+:root{
+  --bg: #07111a;
+  --surface: #0b1620;
+  --neon-cyan: #00f0ff;
+  --neon-purple: #a855f7;
+  --neon-magenta: #ff4fd8;
+}
+
+/* layout */
+html,body,#root{height:100%}
+body{
+  background: radial-gradient(1000px 400px at 20% 10%, rgba(0,240,255,0.03), transparent),
+              radial-gradient(800px 300px at 80% 90%, rgba(168,85,247,0.02), transparent);
+  background-color: var(--bg);
+  color: #cbd5e1;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* helpers */
+.neon-title{
+  color: var(--neon-cyan);
+  text-shadow: 0 0 6px rgba(0,240,255,0.12), 0 0 18px rgba(168,85,247,0.06);
+}
+
+.card-surface{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(0,200,230,0.06);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.6), 0 0 30px rgba(0,240,255,0.03);
+  backdrop-filter: blur(6px);
+  border-radius: 12px;
+}
+
+.btn-neon{
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 6px 24px rgba(168,85,247,0.14), 0 0 20px rgba(0,240,255,0.06);
+}
+
+/* mic */
+.mic-blob{
+  width: 160px;
+  height: 160px;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.05), transparent 25%), linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow: 0 20px 80px rgba(0,240,255,0.12), 0 8px 30px rgba(168,85,247,0.08);
+}
